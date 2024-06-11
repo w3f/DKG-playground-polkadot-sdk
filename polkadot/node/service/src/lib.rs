@@ -933,6 +933,10 @@ pub fn new_full<
 		IncomingRequest::get_config_receiver::<_, Network>(&req_protocol_names);
 	net_config.add_request_response_protocol(cfg);
 
+	// TODO_ANDREW: add notification protocol to `net_config` similar to how GRANDPA or beefy does.
+	// However these notifications need to received by collators not just other validators so might need to
+	// look at how the collations are done for some insight.
+
 	let grandpa_hard_forks = if config.chain_spec.is_kusama() {
 		grandpa_support::kusama_hard_forks()
 	} else {
