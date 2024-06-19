@@ -43,7 +43,7 @@ pub fn dkg_peers_set_config<
         1024 * 1024,
         None,
         sc_network::config::SetConfig {
-            in_peers: 0,
+            in_peers: 3,
             out_peers: 3,
             reserved_nodes: Vec::new(),
             non_reserved_mode: sc_network::config::NonReservedPeerMode::Accept
