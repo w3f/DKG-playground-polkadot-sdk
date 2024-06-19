@@ -47,6 +47,8 @@ pub enum Requests {
 	/// Fetch a collation from a collator which previously announced it.
 	/// Compared to V1 it requires specifying which candidate is requested by its hash.
 	CollationFetchingV2(OutgoingRequest<v2::CollationFetchingRequest>),
+	// Fetching a DKG Share from validator
+	DkgShare(OutgoingRequest<v2::DkgShareRequest>),
 }
 
 impl Requests {
@@ -67,6 +69,7 @@ impl Requests {
 			Self::StatementFetchingV1(r) => r.encode_request(),
 			Self::DisputeSendingV1(r) => r.encode_request(),
 			Self::AttestedCandidateV2(r) => r.encode_request(),
+			Self::DkgShare(r) => r.encode_request(),
 		}
 	}
 }

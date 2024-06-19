@@ -42,6 +42,22 @@ pub struct AttestedCandidateRequest {
 	pub mask: StatementFilter,
 }
 
+#[derive(Debug, Clone, Encode, Decode)]
+pub struct DkgShareRequest {
+	// TODO: Perhaps we dont need to have anything in the request?
+	pub data: Vec<u8>
+}
+
+impl IsRequest for DkgShareRequest {
+	type Response = DkgShareResponse;
+	const PROTOCOL: Protocol = Protocol::Dkg;
+}
+
+#[derive(Debug, Clone, Encode, Decode)]
+pub enum DkgShareResponse {
+	Share(Vec<u8>),
+}
+
 /// Response to an `AttestedCandidateRequest`.
 #[derive(Debug, Clone, Encode, Decode)]
 pub struct AttestedCandidateResponse {

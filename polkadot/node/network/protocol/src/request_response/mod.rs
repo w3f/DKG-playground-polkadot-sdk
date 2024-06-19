@@ -102,6 +102,9 @@ pub enum Protocol {
 	/// Protocol for chunk fetching version 2, used by availability distribution and availability
 	/// recovery.
 	ChunkFetchingV2,
+
+	// Protocol for distributing Dkg shares from validators to collator network
+	Dkg,
 }
 
 /// Minimum bandwidth we expect for validators - 500Mbit/s is the recommendation, so approximately
@@ -119,6 +122,10 @@ const DEFAULT_REQUEST_TIMEOUT: Duration = Duration::from_secs(3);
 /// Request timeout where we can assume the connection is already open (e.g. we have peers in a
 /// peer set as well).
 const DEFAULT_REQUEST_TIMEOUT_CONNECTED: Duration = Duration::from_secs(1);
+
+// TODO: What should this be
+/// Timeout for DKG share request
+pub const DKG_REQUEST_TIMEOUT: Duration = Duration::from_secs(2);
 
 /// Timeout for requesting availability chunks.
 pub const CHUNK_REQUEST_TIMEOUT: Duration = DEFAULT_REQUEST_TIMEOUT_CONNECTED;
@@ -285,6 +292,14 @@ impl Protocol {
 				ATTESTED_CANDIDATE_TIMEOUT,
 				tx,
 			),
+			Protocol::Dkg => N::request_response_config(
+				name,
+				legacy_names,
+				1_000,
+				1_000,
+				DKG_REQUEST_TIMEOUT,
+				tx
+			),
 		}
 	}
 
@@ -348,6 +363,8 @@ impl Protocol {
 				);
 				size as usize
 			},
+
+			Protocol::Dkg => 1_000
 		}
 	}
 
@@ -367,6 +384,7 @@ impl Protocol {
 			Protocol::AttestedCandidateV2 => None,
 			Protocol::CollationFetchingV2 => None,
 			Protocol::ChunkFetchingV2 => None,
+			Protocol::Dkg => None,
 		}
 	}
 }
@@ -429,6 +447,7 @@ impl ReqProtocolNames {
 			Protocol::CollationFetchingV2 => "/req_collation/2",
 			Protocol::AttestedCandidateV2 => "/req_attested_candidate/2",
 			Protocol::ChunkFetchingV2 => "/req_chunk/2",
+			Protocol::Dkg => "/req_dkg/2"
 		};
 
 		format!("{}{}", prefix, short_name).into()
