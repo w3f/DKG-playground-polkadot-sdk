@@ -932,7 +932,7 @@ pub fn new_full<
 	let (chunk_req_v2_receiver, cfg) =
 		IncomingRequest::get_config_receiver::<_, Network>(&req_protocol_names);
 	net_config.add_request_response_protocol(cfg);
-	// TODO: How to add the new request to the service to listen and send messages
+	// Start here!! TODO: How to add the new request to the service to listen and send messages
 	// let (dkg_req_v2_receiver, cfg) =
 	// 	IncomingRequest::get_config_receiver::<_, Network>(&req_protocol_names);
 	// net_config.add_request_response_protocol(cfg);
