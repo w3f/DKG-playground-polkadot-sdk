@@ -104,7 +104,7 @@ pub enum Protocol {
 	ChunkFetchingV2,
 
 	// Protocol for distributing Dkg shares from validators to collator network
-	Dkg,
+	DkgV2,
 }
 
 /// Minimum bandwidth we expect for validators - 500Mbit/s is the recommendation, so approximately
@@ -292,7 +292,7 @@ impl Protocol {
 				ATTESTED_CANDIDATE_TIMEOUT,
 				tx,
 			),
-			Protocol::Dkg => N::request_response_config(
+			Protocol::DkgV2 => N::request_response_config(
 				name,
 				legacy_names,
 				1_000,
@@ -364,7 +364,7 @@ impl Protocol {
 				size as usize
 			},
 
-			Protocol::Dkg => 1_000
+			Protocol::DkgV2 => 1_000
 		}
 	}
 
@@ -384,7 +384,7 @@ impl Protocol {
 			Protocol::AttestedCandidateV2 => None,
 			Protocol::CollationFetchingV2 => None,
 			Protocol::ChunkFetchingV2 => None,
-			Protocol::Dkg => None,
+			Protocol::DkgV2 => None,
 		}
 	}
 }
@@ -447,7 +447,7 @@ impl ReqProtocolNames {
 			Protocol::CollationFetchingV2 => "/req_collation/2",
 			Protocol::AttestedCandidateV2 => "/req_attested_candidate/2",
 			Protocol::ChunkFetchingV2 => "/req_chunk/2",
-			Protocol::Dkg => "/req_dkg/2"
+			Protocol::DkgV2 => "/req_dkg/2"
 		};
 
 		format!("{}{}", prefix, short_name).into()

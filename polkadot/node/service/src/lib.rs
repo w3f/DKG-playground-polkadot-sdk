@@ -54,7 +54,7 @@ use {
 	polkadot_node_core_dispute_coordinator::Config as DisputeCoordinatorConfig,
 	polkadot_node_network_protocol::{
 		peer_set::{PeerSet, PeerSetProtocolNames},
-		request_response::ReqProtocolNames,
+		request_response::{ReqProtocolNames, v2::DkgShareRequest},
 	},
 	sc_client_api::BlockBackend,
 	sc_consensus_grandpa::{self, FinalityProofProvider as GrandpaFinalityProofProvider},
@@ -933,9 +933,9 @@ pub fn new_full<
 		IncomingRequest::get_config_receiver::<_, Network>(&req_protocol_names);
 	net_config.add_request_response_protocol(cfg);
 	// Start here!! TODO: How to add the new request to the service to listen and send messages
-	// let (dkg_req_v2_receiver, cfg) =
-	// 	IncomingRequest::get_config_receiver::<_, Network>(&req_protocol_names);
-	// net_config.add_request_response_protocol(cfg);
+	let (dkg_req_v2_receiver, cfg) =
+		IncomingRequest::<DkgShareRequest>::get_config_receiver::<_, Network>(&req_protocol_names);
+	net_config.add_request_response_protocol(cfg);
 
 	// TODO_ANDREW: add notification protocol to `net_config` similar to how GRANDPA or beefy does.
 	// However these notifications need to received by collators not just other validators so might need to
