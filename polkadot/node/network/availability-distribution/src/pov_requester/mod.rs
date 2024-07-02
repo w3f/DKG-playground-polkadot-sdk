@@ -70,6 +70,7 @@ pub async fn fetch_pov<Context>(
 		.get(from_validator.0 as usize)
 		.ok_or(JfyiError::InvalidValidatorIndex)?
 		.clone();
+	// TODO: Check here is where requests are made..
 	let (req, pending_response) = OutgoingRequest::new(
 		Recipient::Authority(authority_id.clone()),
 		PoVFetchingRequest { candidate_hash },
@@ -112,6 +113,7 @@ async fn do_fetch_pov(
 	tx: oneshot::Sender<PoV>,
 	metrics: Metrics,
 ) -> Result<()> {
+	// TODO: Here is where response is grabbed and handed back..
 	let response = pending_response.await.map_err(Error::FetchPoV);
 	let pov = match response {
 		Ok(PoVFetchingResponse::PoV(pov)) => pov,

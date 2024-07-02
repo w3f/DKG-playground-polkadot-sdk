@@ -181,6 +181,7 @@ members = [
 	"polkadot/node/network/bridge",
 	"polkadot/node/network/collator-protocol",
 	"polkadot/node/network/dispute-distribution",
+        "polkadot/node/network/dkg/",
 	"polkadot/node/network/gossip-support",
 	"polkadot/node/network/protocol",
 	"polkadot/node/network/statement-distribution",

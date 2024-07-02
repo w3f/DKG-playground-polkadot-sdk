@@ -124,6 +124,7 @@ polkadot-availability-distribution = { path = "../network/availability-distribut
 polkadot-availability-recovery = { path = "../network/availability-recovery", optional = true }
 polkadot-collator-protocol = { path = "../network/collator-protocol", optional = true }
 polkadot-dispute-distribution = { path = "../network/dispute-distribution", optional = true }
+polkadot-dkg = { path = "../network/dkg", optional = true }
 polkadot-gossip-support = { path = "../network/gossip-support", optional = true }
 polkadot-network-bridge = { path = "../network/bridge", optional = true }
 polkadot-node-collation-generation = { path = "../collation-generation", optional = true }

@@ -41,7 +41,6 @@ pub enum Requests {
 	StatementFetchingV1(OutgoingRequest<v1::StatementFetchingRequest>),
 	/// Requests for notifying about an ongoing dispute.
 	DisputeSendingV1(OutgoingRequest<v1::DisputeRequest>),
-
 	/// Request a candidate and attestations.
 	AttestedCandidateV2(OutgoingRequest<v2::AttestedCandidateRequest>),
 	/// Fetch a collation from a collator which previously announced it.

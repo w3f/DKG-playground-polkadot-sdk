@@ -204,6 +204,7 @@ pub enum CandidateValidationMessage {
 	},
 }
 
+
 /// Messages received by the Collator Protocol subsystem.
 #[derive(Debug, derive_more::From)]
 pub enum CollatorProtocolMessage {
@@ -470,6 +471,13 @@ pub enum AvailabilityDistributionMessage {
 		/// The sender will be canceled if the fetching failed for some reason.
 		tx: oneshot::Sender<PoV>,
 	},
+}
+
+pub type DummyShare = u32;
+#[derive(Debug)]
+pub enum DkgMessage {
+	// Just a dummy example to see if skeleton can work
+	FetchShare(DummyShare)
 }
 
 /// Availability Recovery Message.
