@@ -88,6 +88,7 @@ pub fn dummy_overseer_builder<Spawner, SupportsParachains>(
 		DummySubsystem,
 		DummySubsystem,
 		DummySubsystem,
+		// TODO: Add DummySubsystem here once Dkg is added
 	>,
 	SubsystemError,
 >
@@ -131,6 +132,7 @@ pub fn one_for_all_overseer_builder<Spawner, SupportsParachains, Sub>(
 		Sub,
 		Sub,
 		Sub,
+		// TODO: Add another Sub here once Dkg subsystem is added
 	>,
 	SubsystemError,
 >

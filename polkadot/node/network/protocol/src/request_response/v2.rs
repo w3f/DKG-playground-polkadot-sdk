@@ -50,11 +50,12 @@ pub struct DkgShareRequest {
 
 impl IsRequest for DkgShareRequest {
 	type Response = DkgShareResponse;
-	const PROTOCOL: Protocol = Protocol::Dkg;
+	const PROTOCOL: Protocol = Protocol::DkgV2;
 }
 
 #[derive(Debug, Clone, Encode, Decode)]
 pub enum DkgShareResponse {
+	#[codec(index = 0)]
 	Share(Vec<u8>),
 }
 

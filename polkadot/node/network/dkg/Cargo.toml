@@ -1,0 +1,21 @@
+[package]
+name = "polkadot-dkg"
+description = "polkadot aDkg network protocol"
+version = "7.0.0"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+futures = "0.3.30"
+gum = { package = "tracing-gum", path = "../../gum" }
+codec = { package = "parity-scale-codec", version = "3.6.12", features = ["std"] }
+polkadot-node-network-protocol = { path = "../protocol" }
+polkadot-node-subsystem = { path = "../../subsystem" }
+polkadot-node-subsystem-util = { path = "../../subsystem-util" }
+sc-network = { path = "../../../../substrate/client/network" }
+sp-core = { path = "../../../../substrate/primitives/core", features = ["std"] }
+thiserror = { workspace = true }

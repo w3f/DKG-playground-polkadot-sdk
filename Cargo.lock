@@ -12924,6 +12924,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "polkadot-dkg"
+version = "7.0.0"
+dependencies = [
+ "futures",
+ "parity-scale-codec",
+ "polkadot-node-network-protocol",
+ "polkadot-node-subsystem",
+ "polkadot-node-subsystem-util",
+ "sc-network",
+ "sp-core",
+ "thiserror",
+ "tracing-gum",
+]
+
+[[package]]
 name = "polkadot-erasure-coding"
 version = "7.0.0"
 dependencies = [
@@ -14512,6 +14527,7 @@ dependencies = [
  "polkadot-collator-protocol",
  "polkadot-core-primitives",
  "polkadot-dispute-distribution",
+ "polkadot-dkg",
  "polkadot-gossip-support",
  "polkadot-network-bridge",
  "polkadot-node-collation-generation",

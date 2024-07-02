@@ -80,7 +80,7 @@ use polkadot_node_subsystem_types::messages::{
 	AvailabilityRecoveryMessage, AvailabilityStoreMessage, BitfieldDistributionMessage,
 	CandidateBackingMessage, CandidateValidationMessage, ChainApiMessage, ChainSelectionMessage,
 	CollationGenerationMessage, CollatorProtocolMessage, DisputeCoordinatorMessage,
-	DisputeDistributionMessage, GossipSupportMessage, NetworkBridgeRxMessage,
+	DisputeDistributionMessage, DkgMessage, GossipSupportMessage, NetworkBridgeRxMessage,
 	NetworkBridgeTxMessage, ProspectiveParachainsMessage, ProvisionerMessage, RuntimeApiMessage,
 	StatementDistributionMessage,
 };
@@ -582,6 +582,12 @@ pub struct Overseer<SupportsParachains> {
 		ApprovalVotingMessage,
 	])]
 	approval_distribution: ApprovalDistribution,
+
+	// TODO: Add DkgProtocol to this big macro setup for overseer
+	// #[subsystem(DkgMessage, sends: [
+	// 	NetworkBridgeTxMessage,
+	// ])]
+	// dkg: DkgProtocol,
 
 	#[subsystem(blocking, ApprovalVotingMessage, sends: [
 		ApprovalDistributionMessage,

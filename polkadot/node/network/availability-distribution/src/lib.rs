@@ -118,6 +118,7 @@ impl AvailabilityDistributionSubsystem {
 			let sender = ctx.sender().clone();
 			ctx.spawn(
 				"pov-receiver",
+				// TODO: This is where request receiving happens and then something is sent back I assume..
 				run_pov_receiver(sender.clone(), pov_req_receiver, metrics.clone()).boxed(),
 			)
 			.map_err(FatalError::SpawnTask)?;
@@ -197,6 +198,7 @@ impl AvailabilityDistributionSubsystem {
 						.with_stage(jaeger::Stage::AvailabilityDistribution);
 
 					log_error(
+						// TODO: Requesting here in the main loop
 						pov_requester::fetch_pov(
 							&mut ctx,
 							&mut runtime,
