@@ -88,7 +88,7 @@ pub fn dummy_overseer_builder<Spawner, SupportsParachains>(
 		DummySubsystem,
 		DummySubsystem,
 		DummySubsystem,
-		// TODO: Add DummySubsystem here once Dkg is added
+		DummySubsystem,
 	>,
 	SubsystemError,
 >
@@ -109,6 +109,7 @@ pub fn one_for_all_overseer_builder<Spawner, SupportsParachains, Sub>(
 	InitializedOverseerBuilder<
 		SpawnGlue<Spawner>,
 		SupportsParachains,
+		Sub,
 		Sub,
 		Sub,
 		Sub,
@@ -160,6 +161,7 @@ where
 		+ Subsystem<OverseerSubsystemContext<GossipSupportMessage>, SubsystemError>
 		+ Subsystem<OverseerSubsystemContext<DisputeCoordinatorMessage>, SubsystemError>
 		+ Subsystem<OverseerSubsystemContext<DisputeDistributionMessage>, SubsystemError>
+		+ Subsystem<OverseerSubsystemContext<DkgMessage>, SubsystemError>
 		+ Subsystem<OverseerSubsystemContext<ChainSelectionMessage>, SubsystemError>
 		+ Subsystem<OverseerSubsystemContext<PvfCheckerMessage>, SubsystemError>
 		+ Subsystem<OverseerSubsystemContext<ProspectiveParachainsMessage>, SubsystemError>,
@@ -178,6 +180,7 @@ where
 		.chain_api(subsystem.clone())
 		.collation_generation(subsystem.clone())
 		.collator_protocol(subsystem.clone())
+		.dkg_protocol(subsystem.clone())
 		.network_bridge_tx(subsystem.clone())
 		.network_bridge_rx(subsystem.clone())
 		.provisioner(subsystem.clone())

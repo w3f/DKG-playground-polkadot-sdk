@@ -48,6 +48,7 @@ use std::{collections::HashMap, sync::Arc};
 pub use polkadot_approval_distribution::ApprovalDistribution as ApprovalDistributionSubsystem;
 pub use polkadot_availability_bitfield_distribution::BitfieldDistribution as BitfieldDistributionSubsystem;
 pub use polkadot_availability_distribution::AvailabilityDistributionSubsystem;
+pub use polkadot_dkg::DkgSubsystem;
 pub use polkadot_availability_recovery::AvailabilityRecoverySubsystem;
 pub use polkadot_collator_protocol::{CollatorProtocolSubsystem, ProtocolSide};
 pub use polkadot_dispute_distribution::DisputeDistributionSubsystem;
@@ -184,6 +185,7 @@ pub fn validator_overseer_builder<Spawner, RuntimeClient>(
 		CandidateBackingSubsystem,
 		StatementDistributionSubsystem<rand::rngs::StdRng>,
 		AvailabilityDistributionSubsystem,
+		DkgSubsystem,
 		AvailabilityRecoverySubsystem,
 		BitfieldSigningSubsystem,
 		BitfieldDistributionSubsystem,
@@ -252,6 +254,12 @@ where
 			},
 			req_protocol_names.clone(),
 			Metrics::register(registry)?,
+		))
+		.dkg_protocol(DkgSubsystem::new(
+			polkadot_dkg::IncomingRequestReceivers {
+				dkg_receiver: None,
+			},
+			req_protocol_names.clone()
 		))
 		.availability_recovery(AvailabilityRecoverySubsystem::for_validator(
 			fetch_chunks_threshold,
@@ -378,6 +386,7 @@ pub fn collator_overseer_builder<Spawner, RuntimeClient>(
 		DummySubsystem,
 		DummySubsystem,
 		DummySubsystem,
+		DummySubsystem,
 		AvailabilityRecoverySubsystem,
 		DummySubsystem,
 		DummySubsystem,
@@ -436,6 +445,7 @@ where
 			notification_sinks,
 		))
 		.availability_distribution(DummySubsystem)
+		.dkg_protocol(DummySubsystem)
 		.availability_recovery(AvailabilityRecoverySubsystem::for_collator(
 			None,
 			available_data_req_receiver,

@@ -506,6 +506,13 @@ pub struct Overseer<SupportsParachains> {
 	])]
 	availability_distribution: AvailabilityDistribution,
 
+	// TODO: Add DkgProtocol to this big macro setup for overseer
+	#[subsystem(DkgMessage, sends: [
+		NetworkBridgeTxMessage,
+		DkgMessage, // TODO: Not sure if this is entirely right but works for now
+	])]
+	dkg_protocol: DkgProtocol,
+
 	#[subsystem(AvailabilityRecoveryMessage, sends: [
 		NetworkBridgeTxMessage,
 		RuntimeApiMessage,
@@ -582,12 +589,6 @@ pub struct Overseer<SupportsParachains> {
 		ApprovalVotingMessage,
 	])]
 	approval_distribution: ApprovalDistribution,
-
-	// TODO: Add DkgProtocol to this big macro setup for overseer
-	// #[subsystem(DkgMessage, sends: [
-	// 	NetworkBridgeTxMessage,
-	// ])]
-	// dkg: DkgProtocol,
 
 	#[subsystem(blocking, ApprovalVotingMessage, sends: [
 		ApprovalDistributionMessage,
